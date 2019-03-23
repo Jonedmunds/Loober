@@ -2,10 +2,20 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Loober"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              x:Class="Loober.MainPage">
 
     <StackLayout>
         <StackLayout>
+            
+            <StackLayout>
+                <maps:Map WidthRequest="320" HeightRequest="200"
+                          x:Name="MyMap"
+                          IsShowingUser="True"
+                          MapType="Street"
+                          />
+            </StackLayout>
+            
             <StackLayout HorizontalOptions="Center" VerticalOptions="Start">
 
                 <Entry x:Name="txtId" Placeholder="ID"></Entry>

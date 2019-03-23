@@ -7,6 +7,7 @@ using Xamarin.Forms;
 using Loober.Helper;
 using Loober.Models;
 using Plugin.Geolocator;
+using Xamarin.Forms.Maps;
 
 namespace Loober
 {
@@ -22,7 +23,6 @@ namespace Loober
             CleanPicker.Items.Add("Poor");
             CleanPicker.Items.Add("Very Poor");
             btnGetLocation.Clicked += BtnGetLocation_Clicked;
-
         }
 
         private async void BtnGetLocation_Clicked(object sender, EventArgs e)
@@ -40,6 +40,8 @@ namespace Loober
             txtLat.Text = position.Latitude.ToString();
             txtLong.Text = position.Longitude.ToString();
 
+            MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(position.Latitude, position.Longitude)
+                                , Distance.FromMiles(1)));
         }
 
         protected async override void OnAppearing()
@@ -53,8 +55,6 @@ namespace Loober
         private void CleanPicker_SelectedIndexChanged(object sender, EventArgs e)
         {
             var clean = CleanPicker.Items[CleanPicker.SelectedIndex];
-
-
         }
 
         private async void BtnAdd_Clicked(object sender, EventArgs e)
@@ -112,12 +112,5 @@ namespace Loober
             lstToilets.ItemsSource = allToilets;
         }
 
-        //public bool IsLocationAvailable()
-        //{
-        // if (!CrossGeolocator.IsSupported)
-        // return false;
-
-        //return CrossGeolocator.Current.IsGeolocationAvailable;
-        // }
     }
 }
