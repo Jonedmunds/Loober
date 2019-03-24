@@ -17,8 +17,19 @@ namespace Loober
         public MainPage()
         {
             InitializeComponent();
-            
             btnGetLocation.Clicked += BtnGetLocation_Clicked;
+
+           
+            
+            var position1 = new Position(37, -122);
+
+            var pin1 = new Pin
+            {
+                Type = PinType.Place,
+                Position = position1,
+                Label = "Test"
+            };
+            MyMap.Pins.Add(pin1);
         }
 
         private async void BtnGetLocation_Clicked(object sender, EventArgs e)
@@ -36,7 +47,7 @@ namespace Loober
             
 
             MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(position.Latitude, position.Longitude)
-                                , Distance.FromMiles(1)));
+                                , Distance.FromMiles(2)));
         }
 
         protected async override void OnAppearing()
