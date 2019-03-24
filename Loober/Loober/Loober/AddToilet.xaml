@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Loober.AddToilet">
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Start">
+
+            <Entry x:Name="toiletId" Placeholder="ID"></Entry>
+            <Entry x:Name="toiletName" Placeholder="Enter Name"></Entry>
+            <Entry x:Name="toiletDescription" Placeholder="Enter Description"></Entry>
+            <Picker x:Name="toiletClean" SelectedIndexChanged="CleanPicker_SelectedIndexChanged"/>
+            <Entry x:Name="toiletLat" Placeholder="Latitude"></Entry>
+            <Entry x:Name="toiletLong" Placeholder="Longitude"></Entry>
+
+            
+            <StackLayout  HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                <Button x:Name="btnAddToilet" WidthRequest="200" Text="Add" Clicked="BtnAddToilet_Clicked"/>
+            </StackLayout>
+
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
