@@ -19,17 +19,6 @@ namespace Loober
             InitializeComponent();
             btnGetLocation.Clicked += BtnGetLocation_Clicked;
 
-           
-            
-            var position1 = new Position(37, -122);
-
-            var pin1 = new Pin
-            {
-                Type = PinType.Place,
-                Position = position1,
-                Label = "Test"
-            };
-            MyMap.Pins.Add(pin1);
         }
 
         private async void BtnGetLocation_Clicked(object sender, EventArgs e)
@@ -44,8 +33,6 @@ namespace Loober
 
             var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(100000), null, true);
 
-            
-
             MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(position.Latitude, position.Longitude)
                                 , Distance.FromMiles(2)));
         }
@@ -56,10 +43,9 @@ namespace Loober
             var allToilets = await firebaseHelper.GetAllToilets();
             lstToilets.ItemsSource = allToilets;
             await RetriveLocation();
+            await RetrivePins();
+                        
         }
-
-        
-
 
         public async void BtnAddNewToilet_Clicked(object sender, EventArgs e)
         {
@@ -69,7 +55,25 @@ namespace Loober
             }
         }
 
-        
+        public async Task RetrivePins()
+        {
+            
+            List<Toilet>toilets = await firebaseHelper.GetAllToilets();
 
+            foreach (Toilet t in toilets)
+            {
+                
+                var position1 = new Position(Convert.ToDouble(t.Latitude), Convert.ToDouble(t.Longitude));
+                var name = new Label { Text = t.Name };
+
+                var pin = new Pin
+                {
+                    Type = PinType.Place,
+                    Position = position1,
+                    Label = name.ToString()
+                };
+                MyMap.Pins.Add(pin);
+            };
+        }
     }
 }
